@@ -1,3 +1,6 @@
 #gifGallery div {
   display: inline-block;
 }
+.activeTopic {
+  background-color: red;
+}

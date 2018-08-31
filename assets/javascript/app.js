@@ -11,6 +11,8 @@ function pageGenerator(){
     let butt = $("<button>");
     butt.html("<h2>"+topics[i]+"</h2>");
     $(butt).on("click",function(){
+      $(".activeTopic").removeClass("activeTopic");
+      $(this).addClass("activeTopic");
       //well set the try again button's topic attribute to whatever the latest button press is
        $("#requestMore").attr("currentTopic",$(this).text());
        offset = 0; //resets offset
@@ -34,7 +36,7 @@ function gifMaker(response){
   for(let i = 0; i < 10; i++){
     let pictureFrame = $("<div>");
     //let's set the rating of the pic here.
-    pictureFrame.append("<h2 class='gifRating'> Rating: "+response.data[i].rating+"</h2");
+    pictureFrame.append("<h2 class='gifRating'> Rating: "+response.data[i].rating+" </h2");
     //we'll set a custom attribute
     pictureFrame.attr("isMoving",false);
     //sets the image source we'll be using
