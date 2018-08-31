@@ -29,7 +29,7 @@ function pageGenerator(){
           pictureFrame.attr("stillSrc",response.data[i].images["fixed_height_still"].url);
           pictureFrame.attr("animateSrc",response.data[i].images["fixed_height"].url);
           //sticks default still image on
-          $(pictureFrame).append("<img src='"+pictureFrame.attr("stillSrc")+"' />");
+          $(pictureFrame).append("<img class='img-fluid' src='"+pictureFrame.attr("stillSrc")+"' />");
           //add the click image functionality
           pictureFrame.on("click",function(){
             //if attribute is moving
@@ -37,6 +37,7 @@ function pageGenerator(){
               $(this).attr("isMoving","true");
               //this series of wierd code is written to prevent a clipping issue when loading images.
               let movingImg = $("<img>").attr("src",$(this).attr("animateSrc"));
+              movingImg.addClass("img-fluid");
               let thisButton = this;
               $(movingImg).on("load",function(){
                 $(thisButton).children().last().remove();
@@ -46,7 +47,7 @@ function pageGenerator(){
             else{
               $(this).attr("isMoving","false");
               $(this).children().last().remove();
-              $(this).append("<img src='"+pictureFrame.attr("stillSrc")+"' />");
+              $(this).append("<img class='img-fluid' src='"+pictureFrame.attr("stillSrc")+"' />");
             }
           });
           $("#gifGallery").append(pictureFrame);
