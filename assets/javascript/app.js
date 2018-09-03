@@ -1,10 +1,23 @@
 let apikey = "VHi8AqnqicsB04oW6P1Vj8bjeIGMXBrc";
-let topics = ["reactions", "scoot", "spooky",
-              "sloth","cats","nope","nigel"];
+let topics;
 let offset = 0; // this is going to stop repeating images in get more gif's
 let hoverCount = 0;
+//localStorage.removeItem(("topics"));
+init();
 pageGenerator();
-//we'll write the topic button generator
+function init(){
+  //if localStorage is empty...
+  if (localStorage.getItem("topics") === null){
+    topics = ["reactions", "scoot", "spooky", "sloth","cats","nope","nigel"];
+  }
+  //else we'll load localStorage
+  else {
+    console.log(JSON.parse(localStorage.getItem("topics")));
+    topics = JSON.parse(localStorage.getItem("topics"));
+  }
+}
+
+
 function pageGenerator(){
   //clears previous buttons
   $("#topicBar").empty();
@@ -78,9 +91,11 @@ function gifMaker(response){
 //new topic generator
 $("#newTopicForm").submit(function(){
   event.preventDefault();
-  if(topics.indexOf($("#newTopics").val()) === -1){
+  if(topics.indexOf($("#newTopics").val()) === -1 && $("#newTopics").val() !== ""){
     //pushes latest input into the array
     topics.push($("#newTopics").val());
+    //saves latest array to localStorage
+    localStorage.setItem("topics",JSON.stringify(topics));
     //clears it
     $("#newTopics").html("");
     //re-runs page generator

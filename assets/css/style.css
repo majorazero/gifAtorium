@@ -2,7 +2,7 @@ body {
   background-color: #efefef;
   font-family: "Jua";
 }
-button {
+button, form .inputButton{
   margin: 5px;
   border: none;
   background-color: #a9a9a9;
