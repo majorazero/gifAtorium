@@ -41,7 +41,6 @@ function pageGenerator(){
       //well set the try again button's topic attribute to whatever the latest button press is
        $("#requestMore").attr("currentTopic",$(this).text());
        offset = 0; //resets offset
-      //console.log($(this).text());
       $.ajax({
         url: "https://api.giphy.com/v1/gifs/search?q="+$(this).text()+"&api_key="+apikey+"&limit=10",
         method: "GET"
