@@ -4,7 +4,6 @@
 let apikey = "VHi8AqnqicsB04oW6P1Vj8bjeIGMXBrc";
 let topics;
 let offset = 0; // this is going to stop repeating images in get more gif's
-let hoverCount = 0;
 /////////////////////////////////////////////
 /// Initilization
 /////////////////////////////////////////////
@@ -84,7 +83,6 @@ function gifMaker(response){
     pictureFrame.on("mouseenter",function(){
       //if attribute is moving
       if($(this).attr("isMoving") === "false"){
-        hoverCount++;
         $(this).attr("isMoving","true");
         //this series of wierd code is written to prevent a clipping issue when loading images.
         let movingImg = $("<img>").attr("src",$(this).attr("animateSrc"));
