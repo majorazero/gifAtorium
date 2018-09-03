@@ -22,6 +22,17 @@ button, form .inputButton{
 #gifGallery img {
   border-radius: 10px;
 }
+#more {
+  background-color: #caebf2;
+  padding: 10px;
+  border-radius: 10px;
+}
+#newTopicForm{
+  background-color: #caebf2;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
 #newTopics {
   border-radius: 10px;
   border: none;
