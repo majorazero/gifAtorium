@@ -46,7 +46,13 @@ function gifMaker(response){
     pictureFrame.attr("animateSrc",response.data[i].images["fixed_height"].url);
     //sticks default still image on
     $(pictureFrame).append("<img class='img-fluid' src='"+pictureFrame.attr("stillSrc")+"' />");
-    //add the click image functionality
+    //add on click functionality
+    pictureFrame.on("click",function(){
+      $("#modalGif").empty();
+      $("#modalGif").append("<img class-'imag-fluid' src='"+pictureFrame.attr("animateSrc")+"' />");
+      $("#myModal").modal();
+    });
+    //add the hover image functionality
     pictureFrame.on("mouseenter",function(){
       //if attribute is moving
       if($(this).attr("isMoving") === "false"){

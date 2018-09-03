@@ -30,6 +30,21 @@ button {
 .activeTopic {
   background-color: #ff3b3f;
 }
+.modal-content {
+  border-radius: 10px;
+  border: none;
+}
+.modal-dialog {
+  text-align: center;
+  border-radius: 10px;
+}
+.modal-body {
+  background-color: #a9a9a9;
+  border-radius: 10px;
+}
+.modal-body img{
+  border-radius: 10px;
+}
 .pictureFrame {
   margin: 5px;
   border-color: #a9a9a9;
