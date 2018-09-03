@@ -12,7 +12,6 @@ function init(){
   }
   //else we'll load localStorage
   else {
-    console.log(JSON.parse(localStorage.getItem("topics")));
     topics = JSON.parse(localStorage.getItem("topics"));
   }
 }
@@ -32,7 +31,7 @@ function pageGenerator(){
        offset = 0; //resets offset
       //console.log($(this).text());
       $.ajax({
-        url: "http://api.giphy.com/v1/gifs/search?q="+$(this).text()+"&api_key="+apikey+"&limit=10",
+        url: "https://api.giphy.com/v1/gifs/search?q="+$(this).text()+"&api_key="+apikey+"&limit=10",
         method: "GET"
       }).then(function(response){
         //clears previous topics
@@ -107,7 +106,7 @@ $("#requestMore").on("click",function(){
   if(!$("#gifGallery").is(":empty")){
     offset += 10; //we start the offset
     $.ajax({
-      url: "http://api.giphy.com/v1/gifs/search?q="+$("#requestMore").attr("currentTopic")+"&api_key="+apikey+"&limit=10&offset="+offset,
+      url: "https://api.giphy.com/v1/gifs/search?q="+$("#requestMore").attr("currentTopic")+"&api_key="+apikey+"&limit=10&offset="+offset,
       method: "GET"
     }).then(function(response){
       gifMaker(response);
