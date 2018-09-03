@@ -1,10 +1,21 @@
+/////////////////////////////////////////////
+/// Global Variables
+/////////////////////////////////////////////
 let apikey = "VHi8AqnqicsB04oW6P1Vj8bjeIGMXBrc";
 let topics;
 let offset = 0; // this is going to stop repeating images in get more gif's
 let hoverCount = 0;
-//localStorage.removeItem(("topics"));
+/////////////////////////////////////////////
+/// Initilization
+/////////////////////////////////////////////
 init();
-pageGenerator();
+/////////////////////////////////////////////
+/// Functions
+/////////////////////////////////////////////
+/**
+* We'll check if the localStorage exists and sets the topic
+* Then we'll generate our topic Bar.
+*/
 function init(){
   //if localStorage is empty...
   if (localStorage.getItem("topics") === null){
@@ -14,9 +25,11 @@ function init(){
   else {
     topics = JSON.parse(localStorage.getItem("topics"));
   }
+  pageGenerator();
 }
-
-
+/**
+* Generates our topic bar, and gives each topic a button function
+*/
 function pageGenerator(){
   //clears previous buttons
   $("#topicBar").empty();
@@ -42,7 +55,10 @@ function pageGenerator(){
     $("#topicBar").append(butt);
   }
 }
-//constructs 10 gif frames
+/**
+* This function loads 10 gifs, and gives them onclick/hover functionality.
+* @param {Object} response This is a JSON object our AJAX call returns
+*/
 function gifMaker(response){
   //this is where we'll construct our picture html
   //will create 10 of these
@@ -87,7 +103,27 @@ function gifMaker(response){
     $("#gifGallery").prepend(pictureFrame);
   }
 }
-//new topic generator
+/////////////////////////////////////////////
+/// Event Functions
+/////////////////////////////////////////////
+/**
+* This will give get the gifMaker to generates another 10 GIF's
+*/
+$("#requestMore").on("click",function(){
+  if(!$("#gifGallery").is(":empty")){
+    offset += 10; //we start the offset
+    $.ajax({
+      url: "https://api.giphy.com/v1/gifs/search?q="+$("#requestMore").attr("currentTopic")+"&api_key="+apikey+"&limit=10&offset="+offset,
+      method: "GET"
+    }).then(function(response){
+      gifMaker(response);
+    });
+  }
+});
+/**
+* This will check if the search topic is already searched for
+* and if it isn't add it to the topic bar.
+*/
 $("#newTopicForm").submit(function(){
   event.preventDefault();
   if(topics.indexOf($("#newTopics").val()) === -1 && $("#newTopics").val() !== ""){
@@ -99,17 +135,5 @@ $("#newTopicForm").submit(function(){
     $("#newTopics").html("");
     //re-runs page generator
     pageGenerator();
-  }
-});
-//the request additioanl gif function
-$("#requestMore").on("click",function(){
-  if(!$("#gifGallery").is(":empty")){
-    offset += 10; //we start the offset
-    $.ajax({
-      url: "https://api.giphy.com/v1/gifs/search?q="+$("#requestMore").attr("currentTopic")+"&api_key="+apikey+"&limit=10&offset="+offset,
-      method: "GET"
-    }).then(function(response){
-      gifMaker(response);
-    });
   }
 });
